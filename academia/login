@@ -1,0 +1,46 @@
+<?php
+include_once 'conexão.php';
+?>
+
+<?php
+
+$dadoslogin= filter_input_array(input_post;filter_default);
+
+if (!empity($dadoslogin['btnlogin'])) {
+
+$buscalogin="Select matricula,nome,email,senha
+                      From   aluno
+                      Where email:usuário
+                      limit 1";
+
+    $resultado=$conn>prepare($buscalogin);
+    $resultado>bindParam(':usuario',$dadoslogin
+   ['usuario'],Param_Str);
+   $resultado>execute();
+if($resultado) AND ($resultado>rowcount()!=0){
+    $resposta=$resultado>fetch(<PDO:Fetch-Assoc);
+    Var-dump($resposta);
+
+    if(password-verify($dadoslogin['senha'],$resposta
+    ['senha'])){
+        header("location:administrativo.php");
+    else{
+        echo:"Usuário ou senha invalido"
+}
+else}
+    echo"usuário ou senha inválida";
+}
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
