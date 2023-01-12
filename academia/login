@@ -1,5 +1,8 @@
 <?php
-include_once 'conexão.php';
+       include_once 'conexão.php';
+
+        session-start();
+        ob-start();
 ?>
 
 <?php
@@ -9,9 +12,9 @@ $dadoslogin= filter_input_array(input_post;filter_default);
 if (!empity($dadoslogin['btnlogin'])) {
 
 $buscalogin="Select matricula,nome,email,senha
-                      From   aluno
-                      Where email:usuário
-                      limit 1";
+                      FROM   aluno
+                      WHERE email:usuário
+                      LIMIT  1";
 
     $resultado=$conn>prepare($buscalogin);
     $resultado>bindParam(':usuario',$dadoslogin
@@ -23,7 +26,7 @@ if($resultado) AND ($resultado>rowcount()!=0){
 
     if(password-verify($dadoslogin['senha'],$resposta
     ['senha'])){
-        header("location:administrativo.php");
+        header("Location:administrativo.php");
     else{
         echo:"Usuário ou senha invalido"
 }
@@ -32,6 +35,28 @@ else}
 }
    
 }
+else{
+    echo "usuário ou senha Invalida!"
+}
+    echo "usuário ou senha Invalida!"
+  }
+  <form id="login-form" class="form" action="" method="POST">
+                            
+                            <div class="form-group">
+                                <label for="username" class="text-info">Nome de Usuário:</label><br>
+                                <input type="text" name="usuario" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Senha:</label><br>
+                                <input type="password" name="senha" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                               
+                                <input type="submit"  class="btn btn-info btn-md" value="Enviar" name="btnlogin">
+                                <input type="submit" name="cadastro" class="btn btn-info btn-md" value="Cadastre-se">
+                            </div>
+                            
+                        </form>
 
 
 
